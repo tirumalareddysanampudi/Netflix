@@ -34,7 +34,7 @@ pipeline{
         }
         stage('Install Dependencies') {
             steps {
-                sh "npm install"
+                sh " sudo npm install -y"
             }
         }
     }
@@ -45,7 +45,7 @@ pipeline{
             body: "Project: ${env.JOB_NAME}<br/>" +
                 "Build Number: ${env.BUILD_NUMBER}<br/>" +
                 "URL: ${env.BUILD_URL}<br/>",
-            to: 'postbox.aj99@gmail.com',
+            to: 'tirumalareddysanampudi@gmail.com',
             attachmentsPattern: 'trivyfs.txt,trivyimage.txt'
         }
     }
