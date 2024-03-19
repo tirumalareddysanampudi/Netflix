@@ -37,16 +37,19 @@ pipeline{
                 sh 'sudo apt-get install npm -y'
             }
         }
-
-       stage('OWASP FS SCAN') {
-            steps {
-                dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit',  odcInstallation: 'Dp-Check'
-                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
-            }
-        }
-        stage('TRIVY FS SCAN') {
-            steps {
-                sh "trivy fs . > trivyfs.txt"
+        stage('OWASP Dependency-Check Vulnerabilities') {
+      steps {
+        dependencyCheck additionalArguments: ''' 
+                    -o './'
+                    -s './'
+                    -f 'ALL' 
+                    --prettyPrint''', odcInstallation: 'Dp-Check'
+      dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+      }
+    }
+    stage('TRIVY FS SCAN') {
+         steps {
+             sh "trivy fs . > trivyfs.txt"
             }
         }
         
