@@ -52,6 +52,22 @@ pipeline{
              sh "trivy fs . > trivyfs.txt"
             }
         }
+    stage("Docker Build & Push"){
+            steps{
+                script{
+                   withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
+                       sh "docker build --build-arg TMDB_V3_API_KEY=Aj7ay86fe14eca3e76869b92 -t netflix ."
+                       sh "docker tag netflix sevenajay/netflix:latest "
+                       sh "docker push sevenajay/netflix:latest "
+                    }
+                }
+            }
+        }
+        stage("TRIVY"){
+            steps{
+                sh "trivy image sevenajay/netflix:latest > trivyimage.txt"
+            }
+        }
         
     }
     post {
