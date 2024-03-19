@@ -2,6 +2,7 @@ pipeline{
     agent any
     tools{
         nodejs 'node16'
+        Docker 'docker'
     }
     environment {
         SCANNER_HOME=tool 'Sonar-Scanner'
