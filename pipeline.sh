@@ -4,7 +4,7 @@ pipeline{
         nodejs 'node16'
     }
     environment {
-        SCANNER_HOME=tool 'sonar-scanner'
+        SCANNER_HOME=tool 'Sonar-Scanner'
     }
     stages {
         stage('clean workspace'){
@@ -14,7 +14,7 @@ pipeline{
         }
         stage('Checkout from Git'){
             steps{
-                git branch: 'main', url: 'https://github.com/Aj7Ay/Netflix-clone.git'
+                git branch: 'main', credentialsId: 'Git-Hub', url: 'https://github.com/tirumalareddysanampudi/Netflix.git'
             }
         }
         stage("Sonarqube Analysis "){
@@ -28,7 +28,7 @@ pipeline{
         stage("quality gate"){
            steps {
                 script {
-                    waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-token'
+                    waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-Token'
                 }
             }
         }
