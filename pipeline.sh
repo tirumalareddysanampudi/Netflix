@@ -58,12 +58,12 @@ pipeline{
         #             }
         #         }
         #     }
-        }
-        stage("TRIVY"){
-            steps{
-                sh "trivy image sevenajay/netflix:latest > trivyimage.txt"
-            }
-        }
+        # }
+        # stage("TRIVY"){
+        #     steps{
+        #         sh "trivy image sevenajay/netflix:latest > trivyimage.txt"
+        #     }
+        # }
     }
     post {
      always {
