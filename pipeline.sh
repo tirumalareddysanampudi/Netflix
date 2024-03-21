@@ -17,9 +17,9 @@ pipeline{
                 git branch: 'main', credentialsId: 'Git-Hub', url: 'https://github.com/tirumalareddysanampudi/Netflix.git'
             }
         }
-        stage("Sonarqube Analysis "){
+         stage("Sonarqube Analysis "){
             steps{
-                withSonarQubeEnv(credentialsId: 'sonar-credential-token') {
+                withSonarQubeEnv('sonar-server') {
                     sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Netflix \
                     -Dsonar.projectKey=Netflix '''
                 }
