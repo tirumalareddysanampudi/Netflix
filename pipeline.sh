@@ -39,7 +39,8 @@ pipeline{
         }
         stage('OWASP Dependency-Check Vulnerabilities') {
       steps {
-        dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-Check'
+        dependencyCheck additionalArguments: '''--scan   **/
+--format	JSON''', odcInstallation: 'Dp-Check'
         dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
       }
     }
