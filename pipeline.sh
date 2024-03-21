@@ -39,12 +39,8 @@ pipeline{
         }
         stage('OWASP Dependency-Check Vulnerabilities') {
       steps {
-        dependencyCheck additionalArguments: ''' 
-                    -o './'
-                    -s './'
-                    -f 'ALL' 
-                    --prettyPrint''', odcInstallation: 'Dp-Check'
-      dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+        dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-Check'
+        dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
       }
     }
     stage('TRIVY FS SCAN') {
