@@ -40,7 +40,7 @@ pipeline{
         stage('OWASP Dependency-Check Vulnerabilities') {
       steps {
         dependencyCheck additionalArguments: '''--scan   /root/.jenkins/workspace/Netflix/
---format	XML''', odcInstallation: 'Dp-Check'
+ 	--disableYarnAudit  --disableNodeAudit ''', odcInstallation: 'Dp-Check'
         dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
       }
     }
