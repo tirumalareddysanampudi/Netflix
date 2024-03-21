@@ -1,11 +1,11 @@
-FROM node:21.7.1-alpine3.19 
-WORKDIR /app/
-COPY ./package.json  ./
-COPY ./yarn.lock  ./
+FROM node:16.17.0-alpine as builder
+WORKDIR /app
+COPY ./package.json .
+COPY ./yarn.lock .
 RUN yarn install
 COPY . .
-ARG MY-NETFLIX
-ENV VITE_APP_TMDB_V3_API_KEY=${MY-NETFLIX}
+ARG TMDB_V3_API_KEY
+ENV VITE_APP_TMDB_V3_API_KEY=${TMDB_V3_API_KEY}
 ENV VITE_APP_API_ENDPOINT_URL="https://api.themoviedb.org/3"
 RUN yarn build
 
