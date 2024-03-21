@@ -5,7 +5,7 @@ COPY ./yarn.lock .
 RUN yarn install
 COPY . .
 ARG MY-NETFLIX
-ENV VITE_APP_TMDB_V3_API_KEY=${MY-NETFLIX}
+ENV VITE_APP_TMDB_V3_API_KEY=$MY-NETFLIX
 ENV VITE_APP_API_ENDPOINT_URL="https://api.themoviedb.org/3"
 RUN yarn build
 
